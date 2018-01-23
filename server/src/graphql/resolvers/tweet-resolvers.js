@@ -18,10 +18,18 @@ export default {
             throw err;
         }
     },
+    getUserTweets: async (_, args, context) => {
+        try {
+            await requireAuth(context.user);
+            return Tweet.find({ user: context.user._id }).sort({ createdAt: -1 })
+        } catch (err) {
+            throw err;
+        }
+    },
     createTweet: async (_, args, context) => {
         try {
             await requireAuth(context.user);
-            return Tweet.create(args)
+            return Tweet.create({ ...args, user: context.user._id })
         } catch (err) {
             throw err;
         }
@@ -29,7 +37,16 @@ export default {
     updateTweet: async (_, { _id, ...rest }, context) => {
         try {
             await requireAuth(context.user);
-            return Tweet.findByIdAndUpdate(_id, rest, { new: true })
+            const tweet = await Tweet.findOne({ _id, user: context.user._id });
+            if (!tweet) {
+                throw new Error('Not found!')
+            }
+
+            Object.entries(rest).forEach(([key, value]) => {
+                tweet[key] = value;
+            });
+
+            return tweet.save();
         } catch (err) {
             throw err;
         }
@@ -37,9 +54,14 @@ export default {
     deleteTweet: async (_, { _id }, context) => {
         try {
             await requireAuth(context.user);
-            await Tweet.findByIdAndRemove(_id);
+            const tweet = await Tweet.findOne({ _id, user: context.user._id });
+            if (!tweet) {
+                throw new Error('Not found!')
+            }
+
+            await tweet.remove();
             return {
-                message: 'Deleted succesfully'
+                message: 'Deleted successfully'
             }
         } catch (err) {
             throw err;

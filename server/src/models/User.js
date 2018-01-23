@@ -37,7 +37,7 @@ UserSchema.methods = {
             },
             constants.JWT_SECRET
         );
-    }
+    },
 };
 
 export default mongoose.model('User', UserSchema);

@@ -11,13 +11,14 @@ middlewares(app);
 
 const graphQLServer = createServer(app);
 
-seeds().then(() => {
-    graphQLServer.listen(constants.PORT, err => {
-        if (err) {
-            console.error(err);
-        }
-        else {
-            console.log(`App listen to port: ${constants.PORT}`);
-        }
-    });
+//removed faker seeds
+//seeds().then(() => {
+graphQLServer.listen(constants.PORT, err => {
+    if (err) {
+        console.error(err);
+    }
+    else {
+        console.log(`App listen to port: ${constants.PORT}`);
+    }
 });
+//});
