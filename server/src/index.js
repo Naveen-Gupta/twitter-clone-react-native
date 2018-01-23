@@ -1,33 +1,13 @@
 import express from 'express';
-import bodyParser from 'body-parser';
-import { graphiqlExpress, graphqlExpress } from 'apollo-server-express';
-import { makeExecutableSchema } from 'graphql-tools';
 import { createServer } from 'http';
 
 import './config/db';
 import constants from './config/constants';
-import typeDefs from './graphql/schema';
-import resolvers from './graphql/resolvers';
 import seeds from './seeds';
+import middlewares from './middlewares';
 
 const app = express();
-
-const schema = makeExecutableSchema({
-    typeDefs,
-    resolvers
-});
-
-const PORT = process.env.PORT || 8081;
-
-app.use(bodyParser.json());
-
-app.use('/graphiql', graphiqlExpress({
-    endpointURL: constants.GRAPHQL_PATH
-}));
-
-app.use(constants.GRAPHQL_PATH, graphqlExpress({
-    schema
-}));
+middlewares(app);
 
 const graphQLServer = createServer(app);
 

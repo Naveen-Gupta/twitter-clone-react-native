@@ -1,13 +1,17 @@
 import TweetResolvers from './tweet-resolvers';
+import UserResolvers from './user-resolvers';
 
 export default {
     Query: {
         getTweet: TweetResolvers.getTweet,
         getTweets: TweetResolvers.getTweets,
+        me: UserResolvers.me,
     },
     Mutation: {
         createTweet: TweetResolvers.createTweet,
         updateTweet: TweetResolvers.updateTweet,
         deleteTweet: TweetResolvers.deleteTweet,
+        signup: UserResolvers.signup,
+        login: UserResolvers.login,
     }
 }
