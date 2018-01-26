@@ -32,7 +32,8 @@ Install Expo as global dependency
 **Start with expo**
 mobile$ exp start
 
-
+Download the Expo app from PlayStore
+and scan the QR Code
 
 
 
