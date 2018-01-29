@@ -7,6 +7,7 @@ import { store, client } from './src/store';
 import { colors } from './src/utils/constants';
 
 import HomeScreen from './src/screens/HomeScreen';
+import Welcome from './src/components/Welcome';
 
 if (UIManager.setLayoutAnimationEnabledExperimental) {
   UIManager.setLayoutAnimationEnabledExperimental(true);
