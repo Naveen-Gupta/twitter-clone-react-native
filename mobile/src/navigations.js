@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
 import { addNavigationHelpers, StackNavigator, TabNavigator, DrawerNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
+import { SimpleLineIcons, Entypo } from '@expo/vector-icons';
 
 import { colors } from './utils/constants';
 import HomeScreen from './screens/HomeScreen';
+import ExploreScreen from './screens/ExploreScreen';
+
+const TAB_ICON_SIZE = 20;
+
+
 
 // const Tabs = TabNavigator(
 //     {
@@ -12,7 +18,7 @@ import HomeScreen from './screens/HomeScreen';
 //             navigationOptions: () => ({
 //                 headerTitle: 'Home',
 //                 tabBarIcon: ({ tintColor }) =>
-//                     <FontAwesome size={TAB_ICON_SIZE} color={tintColor} name="home" />,
+//                     <Entypo name="heart" size={TAB_ICON_SIZE} color={tintColor} />,
 //             })
 //         }
 //     },
@@ -42,7 +48,7 @@ const Drawable = DrawerNavigator(
         },
         Explore: {
             path: '/explore',
-            screen: HomeScreen
+            screen: ExploreScreen
         }
     },
     {

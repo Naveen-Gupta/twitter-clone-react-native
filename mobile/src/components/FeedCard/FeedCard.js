@@ -29,10 +29,10 @@ const CardContentText = styled.Text`
 
 const text = 'Lhjfsdjjfjsdafjjdasfjdsjfhjahkj';
 
-function FeedCard() {
+function FeedCard({ text, user }) {
     return (
         <Root>
-            <FeedCardHeader />
+            <FeedCardHeader { ...user } />
             <CardContentContainer>
                 <CardContentText>
                     {text}

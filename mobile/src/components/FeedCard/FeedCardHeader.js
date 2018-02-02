@@ -5,11 +5,9 @@ import { fakeAvatarImage } from '../../utils/constants';
 
 const AVATAR_SIZE = 40;
 const AVATAR_RADIUS = AVATAR_SIZE / 2;
-const username = 'naveen1992';
-const firstName = 'Naveen';
-const lastName = 'Gupta';
+// con 
 const createdAt = '1 day ago';
-const avatar = fakeAvatarImage;
+//const avatar = fakeAvatarImage;
 
 const Root = styled.View`
     height: 50;
@@ -62,11 +60,11 @@ const MetaText = styled.Text`
     color: ${props => props.theme.LIGHT_GRAY};
 `;
 
-function FeedCardHeader() {
+function FeedCardHeader(firstName, lastName, username, avatar) {
     return (
         <Root>
             <AvatarContainer>
-                <AvatarImage source={{ uri: avatar }} />
+                <AvatarImage source={{ uri: avatar || fakeAvatarImage }} />
             </AvatarContainer>
             <MetaContainer>
                 <MetaTopContainer>
