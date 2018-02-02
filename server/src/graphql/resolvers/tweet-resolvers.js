@@ -12,7 +12,7 @@ export default {
     },
     getTweets: async (_, args, context) => {
         try {
-            await requireAuth(context.user);
+            // await requireAuth(context.user);
             return Tweet.find({}).sort({ createdAt: -1 })
         } catch (err) {
             throw err;

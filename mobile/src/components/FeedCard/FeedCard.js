@@ -12,6 +12,7 @@ const Root = styled.View`
     shadowOffset: 0px 2px;
     shadowRadius: 2;
     shadowOpacity: 0.1;
+    marginVertical: 5px;
 `;
 
 const CardContentContainer = styled.View`
