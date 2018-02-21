@@ -4,7 +4,7 @@ import { requireAuth } from '../../services/auth';
 export default {
     getTweet: async (_, { _id }, context) => {
         try {
-            await requireAuth(context.user);
+            //await requireAuth(context.user);
             return Tweet.findById(_id)
         } catch (err) {
             throw err;
@@ -20,7 +20,7 @@ export default {
     },
     getUserTweets: async (_, args, context) => {
         try {
-            await requireAuth(context.user);
+            // await requireAuth(context.user);
             return Tweet.find({ user: context.user._id }).sort({ createdAt: -1 })
         } catch (err) {
             throw err;
@@ -28,7 +28,7 @@ export default {
     },
     createTweet: async (_, args, context) => {
         try {
-            await requireAuth(context.user);
+            //await requireAuth(context.user);
             return Tweet.create({ ...args, user: context.user._id })
         } catch (err) {
             throw err;
@@ -36,7 +36,7 @@ export default {
     },
     updateTweet: async (_, { _id, ...rest }, context) => {
         try {
-            await requireAuth(context.user);
+            //await requireAuth(context.user);
             const tweet = await Tweet.findOne({ _id, user: context.user._id });
             if (!tweet) {
                 throw new Error('Not found!')
@@ -53,7 +53,7 @@ export default {
     },
     deleteTweet: async (_, { _id }, context) => {
         try {
-            await requireAuth(context.user);
+            // await requireAuth(context.user);
             const tweet = await Tweet.findOne({ _id, user: context.user._id });
             if (!tweet) {
                 throw new Error('Not found!')

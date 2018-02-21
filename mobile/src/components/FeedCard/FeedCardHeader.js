@@ -60,7 +60,7 @@ const MetaText = styled.Text`
     color: ${props => props.theme.LIGHT_GRAY};
 `;
 
-function FeedCardHeader(firstName, lastName, username, avatar) {
+function FeedCardHeader({ firstName, lastName, username, avatar }) {
     return (
         <Root>
             <AvatarContainer>

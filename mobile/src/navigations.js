@@ -6,6 +6,7 @@ import { SimpleLineIcons, Entypo } from '@expo/vector-icons';
 import { colors } from './utils/constants';
 import HomeScreen from './screens/HomeScreen';
 import ExploreScreen from './screens/ExploreScreen';
+import AuthenticationScreen from './screens/AuthenticationScreen';
 
 const TAB_ICON_SIZE = 20;
 
@@ -58,11 +59,14 @@ const Drawable = DrawerNavigator(
 )
 
 const AppMainNav = StackNavigator({
-    Home: {
+    Home:
+    {
         screen: Drawable
     }
-}, {
-        cardStyle: {
+},
+    {
+        cardStyle:
+        {
             backgroundColor: '#F1F6FA',
         },
         navigationOptions: () => ({
@@ -82,12 +86,16 @@ class AppNavigator extends Component {
             dispatch: this.props.dispatch,
             state: this.props.nav
         });
+        if (!this.props.user.isAuthenticated) {
+            return <AuthenticationScreen />
+        }
         return <AppMainNav navigation={nav} />
     }
 }
 
 export default connect(state => ({
-    nav: state.nav
+    nav: state.nav,
+    user: state.user,
 }))(AppNavigator);
 
 export const router = AppMainNav.router;
