@@ -3,8 +3,10 @@ import styled from 'styled-components/native';
 import Touchable from '@appandflow/touchable';
 import { MaterialIcons } from '@expo/vector-icons';
 import { Platform, Keyboard } from 'react-native';
+import { graphql } from 'react-apollo';
 
-import { colors } from '../utils/constants';
+import { colors, fakeAvatarImage } from '../utils/constants';
+import SIGNUP_MUTATION from '../graphql/mutations/signup';
 
 const Root = styled(Touchable).attrs({
     feedback: 'none'
@@ -74,7 +76,12 @@ const Input = styled.TextInput.attrs({
 `;
 
 class SignupForm extends Component {
-    state = {};
+    state = {
+        fullName: '',
+        email: '',
+        password: '',
+        username: '',
+    };
 
     _onOutidePress = () => Keyboard.dismiss();
 
@@ -90,6 +97,23 @@ class SignupForm extends Component {
             return true;
         }
         return false;
+    }
+
+    _onSignupPress = async () => {
+        const { fullName, email, password, username } = this.state;
+        const avatar = fakeAvatarImage;
+        const { data } = await this.props.mutate({
+            variables: {
+                fullName,
+                email,
+                password,
+                username,
+                avatar
+            }
+        })
+        console.log('------------------')
+        console.log(data)
+
     }
 
     render() {
@@ -136,7 +160,7 @@ class SignupForm extends Component {
                         />
                     </InputWrapper>
                 </Wrapper>
-                <ButtonConfirm disabled={this._checkDisabled()}>
+                <ButtonConfirm disabled={this._checkDisabled()} onPress={()=>this._onSignupPress}>
                     <ButtonConfirmText>
                         Sign Up
                     </ButtonConfirmText>
@@ -146,4 +170,4 @@ class SignupForm extends Component {
     }
 }
 
-export default SignupForm;
+export default graphql(SIGNUP_MUTATION)(SignupForm);

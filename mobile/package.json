@@ -6,7 +6,7 @@
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "debug": "open 'rndebugger://set-debugger-loc?host=localhost&port=19001'",
+    "debug": "set REACT_DEBUGGER='rndebugger-open --open --port 8081'",
     "postinstall": "rndebugger-open --expo"
   },
   "dependencies": {
